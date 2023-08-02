@@ -43,7 +43,7 @@ public class Main {
 
                     case "PRINT_POWER":
                         if (sourcePosition != null && destinationPosition != null) {
-                            int remainingPower = GManPositionService.calculateRemainingPower(sourcePosition, destinationPosition);
+                            int remainingPower = GManPositionService.calculateTurnsAndSteps(sourcePosition, destinationPosition);
                             System.out.println("POWER " + remainingPower);
                         } else {
                             System.out.println("ERROR : Invalid source and destination positions");
