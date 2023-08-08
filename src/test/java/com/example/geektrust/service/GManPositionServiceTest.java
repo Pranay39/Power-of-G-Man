@@ -5,7 +5,6 @@ import com.example.geektrust.exception.InvalidDirectionException;
 import com.example.geektrust.model.GManPositionDTO;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class GManPositionServiceTest {

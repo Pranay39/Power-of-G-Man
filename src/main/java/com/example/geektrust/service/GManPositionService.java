@@ -2,9 +2,8 @@ package com.example.geektrust.service;
 
 import com.example.geektrust.exception.InvalidCoordinatesException;
 import com.example.geektrust.exception.InvalidDirectionException;
-import com.example.geektrust.model.DirectionConstants;
 import com.example.geektrust.model.GManPositionDTO;
-import com.example.geektrust.model.MoveConstants;
+import com.example.geektrust.utils.MoveConstants;
 
 import java.util.ArrayList;
 

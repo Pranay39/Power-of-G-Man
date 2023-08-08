@@ -1,4 +1,4 @@
-package com.example.geektrust.model;
+package com.example.geektrust.utils;
 
 public class MoveConstants {
     public static final int INITIAL_POWER = 200;
