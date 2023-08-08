@@ -177,5 +177,14 @@ public class GManPositionServiceTest {
         Assertions.assertThrows(NullPointerException.class, () -> GManPositionService.calculateTurnsAndSteps(source, destination));
     }
 
+    @Test
+    public void testXYAxisMovementWithEast() {
+        GManPositionDTO source = new GManPositionDTO(5, 5, "E");
+        GManPositionDTO destination = new GManPositionDTO(1, 2, "");
+
+        int result = GManPositionService.calculateTurnsAndSteps(source, destination);
+
+        Assertions.assertEquals(120, result, "Expected remaining power for XY-axis movement in the East direction.");
+    }
 
 }
