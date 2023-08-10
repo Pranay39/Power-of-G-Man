@@ -12,11 +12,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.example.geektrust.service.GManTravelService.travel;
+
+
 
 public class GManPositionService {
 
-
+    GManTravelService gManTravelService = new GManTravelService();
     private static final Set<Character> VALID_DIRECTIONS = new HashSet<>();
 
     static {
@@ -32,9 +33,8 @@ public class GManPositionService {
      * @param source      The source position of the G-Man.
      * @param destination The destination position of the G-Man.
      * @return The remaining power after the travel.
-     * @throws InvalidCoordinatesException If the provided coordinates are invalid.
      */
-    public static int calculateTurnsAndSteps(GManPositionDTO source, GManPositionDTO destination) throws InvalidCoordinatesException {
+    public  int calculateTurnsAndSteps(GManPositionDTO source, GManPositionDTO destination)  {
         validateCoordinates(source);
         validateCoordinates(destination);
         validateSourceDirection(source.getDirection());
@@ -51,16 +51,16 @@ public class GManPositionService {
 
         if (movementX == 0) {
             directions.add(source.getyCoordinate() > destination.getyCoordinate() ? Direction.SOUTH.getSymbol() : Direction.NORTH.getSymbol());
-            return travel(movementY, directions, source.getDirection(), Axis.Y);
+            return gManTravelService.travel(movementY, directions, source.getDirection(), Axis.Y);
         }
 
         if (movementY == 0) {
             directions.add(source.getxCoordinate() > destination.getxCoordinate() ? Direction.WEST.getSymbol() : Direction.EAST.getSymbol());
-            return travel(movementX, directions, source.getDirection(), Axis.X);
+            return gManTravelService.travel(movementX, directions, source.getDirection(), Axis.X);
         }
 
         directions.addAll(determineXYDirections(source, destination));
-        remainingPower = travel(movementX + movementY, directions, source.getDirection(), Axis.XY);
+        remainingPower = gManTravelService.travel(movementX + movementY, directions, source.getDirection(), Axis.XY);
         return remainingPower;
     }
 

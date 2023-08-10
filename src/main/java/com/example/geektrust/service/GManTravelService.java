@@ -3,8 +3,7 @@ package com.example.geektrust.service;
 import com.example.geektrust.utils.Axis;
 import com.example.geektrust.utils.Direction;
 import com.example.geektrust.utils.MoveConstants;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class GManTravelService {
 
@@ -18,7 +17,9 @@ public class GManTravelService {
      * @param axis            The axis of movement (X, Y, or XY).
      * @return The remaining power after the travel.
      */
-    public static int travel(int movements, ArrayList<Character> directions, String sourceDirection, Axis axis) {
+    public int travel(int movements, List<Character> directions, String sourceDirection, Axis axis) {
+        int powerSpentForTwoTurns = MoveConstants.INITIAL_POWER - ((movements * MoveConstants.MOVE_COST) + (MoveConstants.TURN_COST * MoveConstants.TWO_TURNS));
+
         if (axis.equals(Axis.Y)) {
             if (directions.contains(sourceDirection.charAt(0))) {
                 return MoveConstants.INITIAL_POWER - (movements * MoveConstants.MOVE_COST);
@@ -26,7 +27,7 @@ public class GManTravelService {
             if (sourceDirection.equals(String.valueOf(Direction.EAST.getSymbol())) || sourceDirection.equals(String.valueOf(Direction.WEST.getSymbol()))) {
                 return MoveConstants.INITIAL_POWER - ((movements * MoveConstants.MOVE_COST) + MoveConstants.TURN_COST);
             } else {
-                return MoveConstants.INITIAL_POWER - ((movements * MoveConstants.MOVE_COST) + (MoveConstants.TURN_COST * 2));
+                return powerSpentForTwoTurns;
             }
         } else if (axis.equals(Axis.X)) {
             if (directions.contains(sourceDirection.charAt(0))) {
@@ -35,7 +36,7 @@ public class GManTravelService {
             if (sourceDirection.equals(String.valueOf(Direction.NORTH.getSymbol())) || sourceDirection.equals(String.valueOf(Direction.SOUTH.getSymbol()))) {
                 return MoveConstants.INITIAL_POWER - ((movements * MoveConstants.MOVE_COST) + MoveConstants.TURN_COST);
             } else {
-                return MoveConstants.INITIAL_POWER - ((movements * MoveConstants.MOVE_COST) + (MoveConstants.TURN_COST * MoveConstants.TWO_TURNS));
+                return powerSpentForTwoTurns;
             }
         } else if (axis.equals(Axis.XY)) {
             if (directions.contains(sourceDirection.charAt(0))) {
@@ -43,12 +44,10 @@ public class GManTravelService {
                 return MoveConstants.INITIAL_POWER - ((movements * MoveConstants.MOVE_COST) + MoveConstants.TURN_COST);
             } else {
                 // Calculate power after movement and two turns
-                return MoveConstants.INITIAL_POWER - ((movements * MoveConstants.MOVE_COST) + (MoveConstants.TURN_COST * MoveConstants.TWO_TURNS));
+                return powerSpentForTwoTurns;
             }
         } else {
             throw new UnsupportedOperationException("Invalid axis provided.");
         }
     }
-
-
 }
