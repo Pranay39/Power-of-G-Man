@@ -11,9 +11,9 @@ import java.util.List;
 
 public class GManPositionService {
 
-//    GManTravelService travelCalculator = new GManTravelService();
+//    GManTravelService travelCalculatorService = new GManTravelService();
     ValidationService validationService = new ValidationService();
-    TravelCalculator travelCalculator = new TravelCalculator();
+    TravelCalculatorService travelCalculatorService = new TravelCalculatorService();
 
     /**
      * Calculate the number of turns and steps needed for the G-Man to move from the source position to the destination position on the grid.
@@ -26,6 +26,7 @@ public class GManPositionService {
         validationService.validateCoordinates(source);
         validationService.validateCoordinates(destination);
         validationService.validateSourceDirection(source.getDirection());
+
         int remainingPower;
         int movementX = Math.abs(source.getxCoordinate() - destination.getxCoordinate());
         int movementY = Math.abs(source.getyCoordinate() - destination.getyCoordinate());
@@ -38,16 +39,16 @@ public class GManPositionService {
 
         if (movementX == 0) {
             directions.add(source.getyCoordinate() > destination.getyCoordinate() ? Direction.SOUTH.getSymbol() : Direction.NORTH.getSymbol());
-            return travelCalculator.travel(movementY, directions, source.getDirection(), Axis.Y);
+            return travelCalculatorService.travel(movementY, directions, source.getDirection(), Axis.Y);
         }
 
         if (movementY == 0) {
             directions.add(source.getxCoordinate() > destination.getxCoordinate() ? Direction.WEST.getSymbol() : Direction.EAST.getSymbol());
-            return travelCalculator.travel(movementX, directions, source.getDirection(), Axis.X);
+            return travelCalculatorService.travel(movementX, directions, source.getDirection(), Axis.X);
         }
 
         directions.addAll(determineXYDirections(source, destination));
-        remainingPower = travelCalculator.travel(movementX + movementY, directions, source.getDirection(), Axis.XY);
+        remainingPower = travelCalculatorService.travel(movementX + movementY, directions, source.getDirection(), Axis.XY);
         return remainingPower;
     }
 

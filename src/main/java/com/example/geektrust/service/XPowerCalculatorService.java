@@ -5,7 +5,7 @@ import com.example.geektrust.utils.MoveConstants;
 
 import java.util.List;
 
-public class XPowerCalculator implements PowerCalculator {
+public class XPowerCalculatorService implements PowerCalculatorService {
     @Override
     public int calculatePower(int movements, List<Character> directions, String sourceDirection) {
         // Calculate power for Axis X based on provided parameters
@@ -24,6 +24,8 @@ public class XPowerCalculator implements PowerCalculator {
         if (sourceDirection.equals(String.valueOf(Direction.NORTH.getSymbol())) ||
                 sourceDirection.equals(String.valueOf(Direction.SOUTH.getSymbol()))) {
             powerSpent += MoveConstants.TURN_COST;
+        }else{
+            powerSpent += MoveConstants.TURN_COST * MoveConstants.TWO_TURNS;
         }
 
         return MoveConstants.INITIAL_POWER - powerSpent;

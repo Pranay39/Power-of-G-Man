@@ -4,16 +4,16 @@ import com.example.geektrust.utils.Axis;
 
 import java.util.List;
 
-public class TravelCalculator {
+public class TravelCalculatorService {
     public int travel(int movements, List<Character> directions, String sourceDirection, Axis axis) {
-        PowerCalculator calculator;
+        PowerCalculatorService calculator;
 
         if (axis.equals(Axis.Y)) {
-            calculator = new YPowerCalculator();
+            calculator = new YPowerCalculatorService();
         } else if (axis.equals(Axis.X)) {
-            calculator = new XPowerCalculator();
+            calculator = new XPowerCalculatorService();
         } else if (axis.equals(Axis.XY)) {
-            calculator = new XYPowerCalculator();
+            calculator = new XYPowerCalculatorService();
         } else {
             throw new UnsupportedOperationException("Invalid axis provided.");
         }
