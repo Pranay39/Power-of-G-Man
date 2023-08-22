@@ -7,10 +7,6 @@ import java.io.*;
 public class MainTest {
     @Test
     public void testMainWithInputFile() {
-        String input = "SOURCE 0 0 N\nDESTINATION 3 0\nPRINT_POWER\n";
-        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
-        System.setIn(inputStream);
-
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(outputStream);
         System.setOut(printStream);

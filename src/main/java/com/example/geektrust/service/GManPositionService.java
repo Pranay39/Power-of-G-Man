@@ -11,7 +11,6 @@ import java.util.List;
 
 public class GManPositionService {
 
-//    GManTravelService travelCalculatorService = new GManTravelService();
     ValidationService validationService = new ValidationService();
     TravelCalculatorService travelCalculatorService = new TravelCalculatorService();
 
@@ -22,7 +21,7 @@ public class GManPositionService {
      * @param destination The destination position of the G-Man.
      * @return The remaining power after the travel.
      */
-    public int calculateTurnsAndSteps(GManPositionDTO source, GManPositionDTO destination)  {
+    public int calculateTurnsAndSteps(GManPositionDTO source, GManPositionDTO destination) {
         validationService.validateCoordinates(source);
         validationService.validateCoordinates(destination);
         validationService.validateSourceDirection(source.getDirection());
@@ -31,7 +30,7 @@ public class GManPositionService {
         int movementX = Math.abs(source.getxCoordinate() - destination.getxCoordinate());
         int movementY = Math.abs(source.getyCoordinate() - destination.getyCoordinate());
 
-        if(isPositionStill(movementX, movementY)){
+        if (isPositionStill(movementX, movementY)) {
             return MoveConstants.INITIAL_POWER;
         }
 
@@ -64,11 +63,9 @@ public class GManPositionService {
         return directions;
     }
 
-    private boolean isPositionStill(int movementX, int movementY){
-        if (movementX == 0 && movementY == 0) {
-            return true;
-        }
-        return false;
+    private boolean isPositionStill(int movementX, int movementY) {
+        return (movementX == 0 && movementY == 0) ? true : false;
     }
+
 }
 

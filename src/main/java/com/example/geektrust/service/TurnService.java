@@ -1,21 +1,23 @@
 package com.example.geektrust.service;
 
 import com.example.geektrust.utils.Axis;
-import com.example.geektrust.utils.Direction;
 import com.example.geektrust.utils.MoveConstants;
 
-import java.util.List;
+import java.util.*;
 
-public abstract class TurnService implements PowerCalculatorService {
-    protected int calculateTurnCost(Axis axis, String sourceDirection) {
-        if (axis == Axis.X && (sourceDirection.equals(String.valueOf(Direction.NORTH.getSymbol())) || sourceDirection.equals(String.valueOf(Direction.SOUTH.getSymbol())))) {
+public interface TurnService extends PowerCalculatorService {
+    default int calculateTurnCost(Axis axis, String sourceDirection) {
+        Map<Axis, Set<Character>> allowedSymbols = new HashMap<>();
+        allowedSymbols.put(Axis.X, new HashSet<>(Arrays.asList('N', 'S')));
+        allowedSymbols.put(Axis.Y, new HashSet<>(Arrays.asList('E', 'W')));
+
+        char directionSymbol = sourceDirection.charAt(0);
+
+        if (allowedSymbols.containsKey(axis) && allowedSymbols.get(axis).contains(directionSymbol)) {
             return MoveConstants.TURN_COST;
-        }
-        if (axis == Axis.Y && (sourceDirection.equals(String.valueOf(Direction.EAST.getSymbol())) || sourceDirection.equals(String.valueOf(Direction.WEST.getSymbol())))) {
-            return MoveConstants.TURN_COST;
-        }
-        else {
+        } else {
             return MoveConstants.TURN_COST * MoveConstants.TWO_TURNS;
         }
     }
 }
+

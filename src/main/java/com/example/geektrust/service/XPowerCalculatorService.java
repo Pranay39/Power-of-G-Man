@@ -1,21 +1,10 @@
 package com.example.geektrust.service;
 
 import com.example.geektrust.utils.Axis;
-import com.example.geektrust.utils.Direction;
-import com.example.geektrust.utils.MoveConstants;
-
 import java.util.List;
-
-public class XPowerCalculatorService extends TurnService {
-    @Override
-    public int calculatePower(int movements, List<Character> directions, String sourceDirection) {
-        int powerSpent = movements * MoveConstants.MOVE_COST;
-
-        if (directions.contains(sourceDirection.charAt(0))) {
-            return MoveConstants.INITIAL_POWER - powerSpent;
+public class XPowerCalculatorService extends PowerCalculatorBase  {
+        @Override
+        public int calculatePower(int movements, List<Character> directions, String sourceDirection) {
+            return calculatePowerCommon(movements, directions, sourceDirection, Axis.X);
         }
-
-        powerSpent += calculateTurnCost(Axis.X, sourceDirection);
-        return MoveConstants.INITIAL_POWER - powerSpent;
     }
-}

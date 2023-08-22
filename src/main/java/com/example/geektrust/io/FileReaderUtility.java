@@ -2,9 +2,9 @@ package com.example.geektrust.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 public final class FileReaderUtility {
     // Private constructor to prevent instantiation
     private FileReaderUtility() {
@@ -19,9 +19,10 @@ public final class FileReaderUtility {
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
         }
         return lines;
     }
 }
+
